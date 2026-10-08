@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Packing Advisor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Optimized travel planning</p>
+          <h1>Travel Packing Advisor</h1>
+        </div>
+        <button id="loadDemo" class="secondary-button">Load Demo Data</button>
+      </header>
+
+      <main class="layout">
+        <section class="panel form-panel">
+          <div class="panel-header">
+            <h2>Trip constraints</h2>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Max weight (kg)</span>
+              <input id="weightCapacity" type="number" min="1" step="0.5" value="18" />
+            </label>
+            <label>
+              <span>Max volume (L)</span>
+              <input id="volumeCapacity" type="number" min="1" step="1" value="25" />
+            </label>
+          </div>
+
+          <div class="section-header">
+            <h3>Item list</h3>
+            <button id="addItem" class="secondary-button small">Add item</button>
+          </div>
+
+          <div id="itemTable" class="item-table"></div>
+
+          <div class="actions-row">
+            <button id="solveBtn" class="primary-button">Solve packing plan</button>
+            <button id="resetBtn" class="ghost-button">Reset demo</button>
+          </div>
+        </section>
+
+        <section class="panel results-panel">
+          <div class="panel-header">
+            <h2>Optimal packing result</h2>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric-card accent">
+              <span class="label">DP importance</span>
+              <strong id="dpImportance">0</strong>
+            </div>
+            <div class="metric-card">
+              <span class="label">Greedy importance</span>
+              <strong id="greedyImportance">0</strong>
+            </div>
+            <div class="metric-card">
+              <span class="label">Weight used</span>
+              <strong id="usedWeight">0 kg</strong>
+            </div>
+            <div class="metric-card">
+              <span class="label">Volume used</span>
+              <strong id="usedVolume">0 L</strong>
+            </div>
+          </div>
+
+          <div class="result-comparison">
+            <div>
+              <p class="mini-label">DP selected items</p>
+              <ul id="dpItems" class="result-list"></ul>
+            </div>
+            <div>
+              <p class="mini-label">Greedy selected items</p>
+              <ul id="greedyItems" class="result-list"></ul>
+            </div>
+          </div>
+
+          <div class="analysis-box">
+            <div class="analysis-header">
+              <h3>Constraint impact analysis</h3>
+            </div>
+            <div id="analysisTable" class="analysis-table"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
